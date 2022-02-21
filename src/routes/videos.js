@@ -15,36 +15,63 @@ router.get("/", async (req, res) => {
 
     const videosList = await videoController.list(page, limit, sort, onlyPublic, viewedMoreThan);
 
-    return res.status(200).json(videosList);
+    return res.status(200).json({
+      data: videosList,
+      meta: {
+        page: page,
+        limit: limit,
+        sort: sort,
+      },
+    });
   } catch (error) {
-    return res.status(500).json({ error: error.message, stack: error.stack });
+    if (process.env.NODE_ENV === "development") {
+      console.error(error);
+      return res.status(500).json({ error: error.message, stack: error.stack });
+    } else {
+      return res.status(500).send("An error occurred while trying to process the request. Please try again later.");
+    }
   }
 });
 
-router.post("/", function (req, res) {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(422).jsonp(errors.array());
-  }
+router.post("/", validator.validateVideoPayload(), async (req, res) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(422).json(errors.array());
+    }
+    const videoId = await videoController.create(req.body);
 
-  videoController.create(req, res);
+    return res.status(200).json({ id: videoId, message: "Video created successfully!" });
+  } catch (error) {
+    if (process.env.NODE_ENV === "development") {
+      console.error(error);
+      return res.status(500).json({ error: error.message, stack: error.stack });
+    } else {
+      return res.status(500).send("An error occurred while trying to process the request. Please try again later.");
+    }
+  }
 });
 
 router.put("/:id", validator.validateVideoPayload(), async (req, res) => {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(422).jsonp(errors.array());
+      return res.status(422).json(errors.array());
     }
 
     const id = req.params.id;
     const payload = req.body;
 
-    await videoController.update(id, payload);
+    const result = await videoController.update(id, payload);
 
-    res.status(200).json({ message: "Video updated!" });
+    res.status(200).json({ id: id, data: result, message: "Video updated!" });
   } catch (error) {
-    res.status(500).json({ error: error.message, stack: error.stack });
+    if (process.env.NODE_ENV === "development") {
+      console.error(error);
+      return res.status(500).json({ error: error.message, stack: error.stack });
+    } else {
+      return res.status(500).send("An error occurred while trying to process the request. Please try again later.");
+    }
   }
 });
 
@@ -56,7 +83,12 @@ router.delete("/:id", async (req, res) => {
 
     res.status(200).json({ message: `Video ${id} deleted!` });
   } catch (error) {
-    res.status(500).json({ error: error.message, stack: error.stack });
+    if (process.env.NODE_ENV === "development") {
+      console.error(error);
+      return res.status(500).json({ error: error.message, stack: error.stack });
+    } else {
+      return res.status(500).send("An error occurred while trying to process the request. Please try again later.");
+    }
   }
 });
 

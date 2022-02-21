@@ -1,8 +1,8 @@
-const express = require("express");
-const path = require("path");
-const errorHandler = require("errorhandler");
 const cookieParser = require("cookie-parser");
+const errorHandler = require("errorhandler");
+const express = require("express");
 const logger = require("morgan");
+const path = require("path");
 const rfs = require("rotating-file-stream");
 
 const indexRouter = require("./routes/index");
@@ -19,7 +19,7 @@ const accessLogStream = rfs.createStream("access.log", {
 
 if (process.env.NODE_ENV === "development") {
   app.use(errorHandler({ dumpExceptions: true, showStack: true }));
-  app.use(logger("dev"));
+  app.use(logger("short", { stream: accessLogStream }));
 } else if (process.env.NODE_ENV === "production") {
   app.use(express.errorHandler());
   app.use(logger("short", { stream: accessLogStream }));
