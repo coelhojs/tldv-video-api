@@ -9,4 +9,4 @@ const Video = new Schema({
   timesViewed: { type: Number, required: true, default: 0 },
 });
 
-module.exports = mongoose.model("Videos", Video);
+module.exports = mongoose.model(process.env.COLLECTION_NAME, Video);

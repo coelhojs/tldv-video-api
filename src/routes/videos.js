@@ -33,7 +33,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", validator.validateVideoPayload(), async (req, res) => {
+router.post("/", validator.validateVideoCreation(), async (req, res) => {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -52,7 +52,7 @@ router.post("/", validator.validateVideoPayload(), async (req, res) => {
   }
 });
 
-router.put("/:id", validator.validateVideoPayload(), async (req, res) => {
+router.put("/:id", validator.validateVideoUpdate(), async (req, res) => {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -79,7 +79,7 @@ router.delete("/:id", async (req, res) => {
   try {
     const id = req.params.id;
 
-    await videoController.delete(id);
+    await videoController.remove(id);
 
     res.status(200).json({ message: `Video ${id} deleted!` });
   } catch (error) {

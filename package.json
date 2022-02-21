@@ -8,7 +8,8 @@
   "scripts": {
     "start": "node ./src/bin/www",
     "seed": "node seedDB.js --trace-warnings",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "pretest": "npm run seed",
+    "test": "mocha test --timeout 10000 --exit"
   },
   "repository": {
     "type": "git",
@@ -41,6 +42,8 @@
   "devDependencies": {
     "@withshepherd/faker": "^5.5.5",
     "dotenv": "^16.0.0",
-    "eslint": "^8.9.0"
+    "eslint": "^8.9.0",
+    "mocha": "^9.2.1",
+    "supertest": "^6.2.2"
   }
 }
