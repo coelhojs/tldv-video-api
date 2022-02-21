@@ -1,18 +1,47 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require("express");
+const path = require("path");
+const errorHandler = require("errorhandler");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
+const rfs = require("rotating-file-stream");
 
-var indexRouter = require('./routes/index');
+const indexRouter = require("./routes/index");
 
-var app = express();
+const app = express();
+const port = process.env.PORT || 80;
 
-app.use(logger('dev'));
+require("./configs/database");
+
+const accessLogStream = rfs.createStream("access.log", {
+  interval: "1d", // rotate daily
+  path: path.join(__dirname, "logs"),
+});
+
+if (process.env.NODE_ENV === "development") {
+  app.use(errorHandler({ dumpExceptions: true, showStack: true }));
+  app.use(logger("dev"));
+} else if (process.env.NODE_ENV === "production") {
+  app.use(express.errorHandler());
+  app.use(logger("short", { stream: accessLogStream }));
+}
+
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
-app.use('/', indexRouter);
+app.use("/api", indexRouter);
+
+const server = app.listen(port, () => {
+  console.log(`Videos API listening on port ${port}`);
+});
+
+process.on("SIGTERM", () => {
+  console.debug("SIGTERM signal received for closing the videos API server");
+
+  server.close(() => {
+    console.debug("API server closed");
+  });
+});
 
 module.exports = app;
