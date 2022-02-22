@@ -11,6 +11,8 @@ if (process.env.NODE_ENV === "development") {
   console.log(process.env.HEROKU_APP_URL);
 }
 
+console.log(process.env);
+
 describe("Testing video endpoints", () => {
   it("Should return a list of videos", async () => {
     const res = await request.get("/api/videos").send();
