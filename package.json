@@ -1,0 +1,49 @@
+{
+  "name": "tldv-video-api",
+  "version": "0.0.1",
+  "main": "src/app.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "node ./src/bin/www",
+    "seed": "node seedDB.js --trace-warnings",
+    "pretest": "npm run seed",
+    "test": "mocha test --timeout 10000 --exit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coelhojs/tldv-video-api.git"
+  },
+  "keywords": [
+    "node",
+    "mongodb",
+    "mongoose",
+    "api"
+  ],
+  "author": "Cristiano Souza",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/coelhojs/tldv-video-api/issues"
+  },
+  "homepage": "https://github.com/coelhojs/tldv-video-api#readme",
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "errorhandler": "^1.5.1",
+    "express": "^4.17.3",
+    "express-validator": "^6.14.0",
+    "mongoose": "^6.2.2",
+    "morgan": "~1.9.1",
+    "rotating-file-stream": "^3.0.2",
+    "swagger-ui-express": "^4.3.0",
+    "validator": "^13.7.0"
+  },
+  "devDependencies": {
+    "@withshepherd/faker": "^5.5.5",
+    "dotenv": "^16.0.0",
+    "eslint": "^8.9.0",
+    "mocha": "^9.2.1",
+    "supertest": "^6.2.2"
+  }
+}
