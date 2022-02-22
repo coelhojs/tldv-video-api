@@ -17,14 +17,14 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Heroku staging deploy
-        uses: akhileshns/heroku-deploy@v3.12.12
-          with:
-            heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-            heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
-            heroku_email: ${{secrets.HEROKU_EMAIL}}
-            healthcheck: ${{secrets.HEROKU_APP_HEALTHCHECK}}
-            delay: 5
-            dontautocreate: true
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          healthcheck: ${{secrets.HEROKU_APP_HEALTHCHECK}}
+          delay: 5
+          dontautocreate: true
 
       - uses: actions/setup-node@v2
         with:
