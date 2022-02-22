@@ -5,11 +5,6 @@ const videos = require("./videos");
 
 router.use("/videos", videos);
 
-/* GET home page. */
-router.get("/", function (req, res, next) {
-  res.render("index", { title: "Express" });
-});
-
 router.get("/health", (req, res) => {
   try {
     return res.status(200).json({
