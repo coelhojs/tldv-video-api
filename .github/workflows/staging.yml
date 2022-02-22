@@ -7,7 +7,6 @@ on:
 
 jobs:
   build:
-    environment: staging
     runs-on: ubuntu-latest
 
     env:
@@ -19,9 +18,9 @@ jobs:
       - uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
           heroku_email: ${{secrets.HEROKU_EMAIL}}
-          healthcheck: ${{secrets.HEROKU_APP_HEALTHCHECK}}
+          heroku_app_name: tldv-video-api-staging
+          healthcheck: https://tldv-video-api-staging.herokuapp.com/api/healthcheck
           delay: 5
           dontautocreate: true
 
