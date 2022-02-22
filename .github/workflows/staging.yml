@@ -1,0 +1,26 @@
+name: CI Staging
+on:
+  push:
+    branches: [develop]
+  pull_request:
+    branches: [develop]
+
+jobs:
+  build:
+    environment: staging
+    runs-on: ubuntu-latest
+
+    env:
+      HEROKU_APP_URL: ${{ secrets.HEROKU_APP_URL }}
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+      - name: Run integration tests
+        run: npm test
