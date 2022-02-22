@@ -5,9 +5,8 @@
     "version": "v1",
     "description": "Available endpoints for the tl;dv Video API",
     "contact": {
-      "name": "Cristiano Souza",
-      "url": "https://localhost:8080/api",
-      "email": "ccoelho.me@gmail.com"
+      "name": "Project repository",
+      "url": "https://github.com/coelhojs/tldv-video-api"
     }
   },
   "basePath": "/api",
@@ -242,8 +241,7 @@
             "_id",
             "name",
             "timesViewed"
-          ],
-          "default": "name"
+          ]
         },
         "viewedMoreThan": {
           "name": "viewedMoreThan",
