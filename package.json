@@ -6,9 +6,8 @@
     "test": "test"
   },
   "scripts": {
-    "start": "node ./src/bin/www",
+    "start": "node src/app.js",
     "seed": "node seedDB.js --trace-warnings",
-    "pretest": "npm run seed",
     "test": "mocha test --timeout 10000 --exit"
   },
   "repository": {
@@ -28,14 +27,10 @@
   },
   "homepage": "https://github.com/coelhojs/tldv-video-api#readme",
   "dependencies": {
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
-    "errorhandler": "^1.5.1",
+    "body-parser": "^1.19.2",
     "express": "^4.17.3",
     "express-validator": "^6.14.0",
     "mongoose": "^6.2.2",
-    "morgan": "~1.9.1",
-    "rotating-file-stream": "^3.0.2",
     "swagger-ui-express": "^4.3.0",
     "validator": "^13.7.0"
   },
