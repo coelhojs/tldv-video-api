@@ -1,4 +1,5 @@
 const assert = require("assert");
+const crypto = require('crypto');
 
 let request = require("supertest");
 
@@ -44,9 +45,9 @@ describe("Testing video endpoints", () => {
     const res = await request.post("/api/videos").send({
       name: "Test" + Date.now().toLocaleString(),
       url: "https://test.com",
-      thumbnailUrl: "http://placeimg.com/640/480",
+      thumbnailUrl: "https://placeimg.com/640/480",
       isPrivate: false,
-      timesViewed: parseInt(Math.random() * 100),
+      timesViewed: parseInt(crypto.randomBytes(1)),
     });
     assert.equal(res.statusCode === 200, true);
   });
@@ -58,7 +59,7 @@ describe("Testing video endpoints", () => {
       name: "Test" + Date.now().toLocaleString(),
       url: "https://test-updated.com",
       isPrivate: true,
-      timesViewed: parseInt(Math.random() * 100),
+      timesViewed: parseInt(crypto.randomBytes(1)),
     });
 
     assert.equal(res.statusCode === 200, true);
