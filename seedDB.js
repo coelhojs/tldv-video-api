@@ -2,6 +2,8 @@ if (process.env.NODE_ENV === "development") {
   require("dotenv").config();
 }
 
+console.log(process.env);
+
 const faker = require("@withshepherd/faker");
 const MongoClient = require("mongodb").MongoClient;
 
