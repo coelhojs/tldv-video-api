@@ -8,6 +8,9 @@ const routes = require("./routes/index");
 
 require("./configs/database");
 
+//Disabling "x-powered-by" header to hide the server technology
+app.disable("x-powered-by");
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 

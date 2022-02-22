@@ -1,16 +1,32 @@
 version: "3"
 services:
+  api:
+    container_name: api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      COLLECTION_NAME: videos
+      CONNECTION_STRING: mongodb://mongodb:27017/?directConnection=true&ssl=false
+      DB_NAME: test
+      PORT: 8080
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongodb
+
   mongodb:
     image: mongo:latest
     container_name: mongodb
     hostname: mongodb
-    env_file:
-      - .env
     ports:
       - 27017:27017
     restart: unless-stopped
-    volumes:
-      - dbdata:/data/db
 
-volumes:
-  dbdata:
+  mongo-seed:
+    container_name: mongo-seed
+    build: ./assets/mongo-seed
+    links:
+      - mongodb
+    depends_on:
+      - mongodb

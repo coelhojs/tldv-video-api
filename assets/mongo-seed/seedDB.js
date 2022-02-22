@@ -12,10 +12,6 @@ async function seedDB() {
   const dbName = process.env.DB_NAME;
   const collectionName = process.env.COLLECTION_NAME;
 
-  console.log(uri);
-  console.log(dbName);
-  console.log(collectionName);
-
   const client = new MongoClient(uri, {
     useNewUrlParser: true,
   });
@@ -25,8 +21,6 @@ async function seedDB() {
     console.log("Connected correctly to server");
 
     const collection = client.db(dbName).collection(collectionName);
-
-    await collection.drop();
 
     let videos = [];
 

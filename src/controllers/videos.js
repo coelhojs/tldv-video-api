@@ -22,9 +22,7 @@ const list = async (page, limit, sort, onlyPublic = false, viewedMoreThan = 0) =
     query.where("timesViewed").gt(viewedMoreThan);
   }
 
-  const videos = await query.sort(sort).skip(skip).limit(limit).lean().exec();
-
-  return videos;
+  return query.sort(sort).skip(skip).limit(limit).lean().exec();
 };
 
 const update = async (id, payload) => {
@@ -35,9 +33,7 @@ const update = async (id, payload) => {
 
   Object.assign(video, payload);
 
-  const result = await video.save();
-
-  return result;
+  return video.save();
 };
 
 const remove = async (id) => {
