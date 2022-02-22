@@ -22,8 +22,6 @@ async function seedDB() {
 
     const collection = client.db(dbName).collection(collectionName);
 
-    await collection.drop();
-
     let videos = [];
 
     for (let i = 0; i < videosCount; i++) {

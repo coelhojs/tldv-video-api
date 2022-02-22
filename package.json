@@ -7,7 +7,7 @@
   },
   "scripts": {
     "start": "node src/app.js",
-    "seed": "node seedDB.js --trace-warnings",
+    "seed": "node assets/mongo-seed/seedDB.js --trace-warnings",
     "test": "mocha test --timeout 10000 --exit"
   },
   "repository": {
