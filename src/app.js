@@ -1,24 +1,20 @@
-const cookieParser = require("cookie-parser");
 const errorHandler = require("errorhandler");
 const express = require("express");
 const swaggerUi = require("swagger-ui-express");
 
-const indexRouter = require("./routes/index");
-
 const app = express();
 const port = process.env.PORT || 80;
+const routes = require("./routes/index");
 
 require("./configs/database");
 
 if (process.env.NODE_ENV === "development") {
   app.use(errorHandler({ dumpExceptions: true, showStack: true }));
 } else if (process.env.NODE_ENV === "production") {
-  app.use(express.errorHandler());
-}
+  app.use(express.errorHandler());}
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
 
 const swaggerDocument = require("./configs/swagger.json");
 
@@ -32,7 +28,7 @@ app.use(
   })
 );
 
-app.use("/api", indexRouter);
+app.use("/api", routes);
 
 const server = app.listen(port, () => {
   console.log(`Videos API listening on port ${port}`);
