@@ -20,7 +20,7 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           heroku_app_name: tldv-video-api-staging
-          healthcheck: https://tldv-video-api-staging.herokuapp.com/api/healthcheck
+          healthcheck: https://tldv-video-api-staging.herokuapp.com/api/health
           delay: 5
           dontautocreate: true
 
