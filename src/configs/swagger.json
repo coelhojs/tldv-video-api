@@ -1,0 +1,390 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "tl;dv Video API",
+    "version": "v1",
+    "description": "Available endpoints for the tl;dv Video API",
+    "contact": {
+      "name": "Cristiano Souza",
+      "url": "https://localhost:8080/api",
+      "email": "ccoelho.me@gmail.com"
+    }
+  },
+  "basePath": "/api",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/health": {
+      "get": {
+        "tags": [
+          "api"
+        ],
+        "summary": "API Healthcheck.",
+        "operationId": "health",
+        "responses": {
+          "200": {
+            "description": "Returns a JSON object with the API status.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/schemas/health"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/videos": {
+      "get": {
+        "tags": [
+          "videos"
+        ],
+        "summary": "Paginated list of videos. The default page size is 10 and the default sort field is 'name'.",
+        "operationId": "listVideos",
+        "parameters": [
+          {
+            "$ref": "#/definitions/parameters/query/page"
+          },
+          {
+            "$ref": "#/definitions/parameters/query/limit"
+          },
+          {
+            "$ref": "#/definitions/parameters/query/sort"
+          },
+          {
+            "$ref": "#/definitions/parameters/query/viewedMoreThan"
+          },
+          {
+            "$ref": "#/definitions/parameters/query/public"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Videos list based on the parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/schemas/videosList"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "videos"
+        ],
+        "summary": "Endpoint for posting new videos.",
+        "operationId": "post",
+        "requestBody": {
+          "description": "Video object. The required fields are: name, url, thumbnailUrl.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/schemas/newVideo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the created video 'id'",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/schemas/actionResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/videos/{id}": {
+      "put": {
+        "tags": [
+          "videos"
+        ],
+        "summary": "Endpoint for updating an existing video.",
+        "operationId": "put",
+        "parameters": [
+          {
+            "$ref": "#/definitions/parameters/query/id"
+          }
+        ],
+        "requestBody": {
+          "description": "Video object.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/schemas/newVideo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the updated video 'id'",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/schemas/actionResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "videos"
+        ],
+        "summary": "Endpoint for deleting an existing video.",
+        "operationId": "delete",
+        "parameters": [
+          {
+            "$ref": "#/definitions/parameters/query/id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the deleted video 'id'",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/schemas/actionResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "parameters": {
+      "body": {
+        "name": {
+          "name": "name",
+          "in": "body",
+          "description": "Video name",
+          "required": true,
+          "type": "string"
+        },
+        "url": {
+          "name": "url",
+          "in": "body",
+          "description": "Video URL",
+          "required": true,
+          "type": "string",
+          "format": "url"
+        },
+        "thumbnailUrl": {
+          "name": "thumbnailUrl",
+          "in": "body",
+          "description": "Video thumbnail URL",
+          "required": true,
+          "type": "string",
+          "format": "url"
+        },
+        "isPrivate": {
+          "name": "isPrivate",
+          "in": "body",
+          "description": "Boolean flag for setting the video as private",
+          "required": false,
+          "type": "boolean"
+        },
+        "timesViewed": {
+          "name": "timesViewed",
+          "in": "body",
+          "description": "View counter for the video",
+          "required": false,
+          "type": "integer"
+        }
+      },
+      "query": {
+        "id": {
+          "name": "id",
+          "in": "path",
+          "description": "Video id",
+          "required": true,
+          "type": "integer"
+        },
+        "page": {
+          "name": "page",
+          "in": "query",
+          "description": "Page number",
+          "required": false,
+          "type": "integer"
+        },
+        "limit": {
+          "name": "limit",
+          "in": "query",
+          "description": "Page size",
+          "required": false,
+          "type": "integer"
+        },
+        "sort": {
+          "name": "sort",
+          "in": "query",
+          "description": "Sort field",
+          "required": false,
+          "type": "enum",
+          "enum": [
+            "_id",
+            "name",
+            "timesViewed"
+          ],
+          "default": "name"
+        },
+        "viewedMoreThan": {
+          "name": "viewedMoreThan",
+          "in": "query",
+          "description": "Viewed more than",
+          "required": false,
+          "type": "integer"
+        },
+        "public": {
+          "name": "public",
+          "in": "query",
+          "description": "Public videos",
+          "required": false,
+          "type": "boolean"
+        }
+      }
+    },
+    "schemas": {
+      "actionResult": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "error": {
+        "type": "object",
+        "required": [
+          "code",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "health": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "string"
+          },
+          "uptime": {
+            "type": "string"
+          }
+        }
+      },
+      "videosList": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/schemas/video"
+            }
+          },
+          "meta": {
+            "type": "object",
+            "properties": {
+              "page": {
+                "type": "integer"
+              },
+              "limit": {
+                "type": "integer"
+              },
+              "sort": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "video": {
+        "type": "object",
+        "required": [
+          "name",
+          "url",
+          "thumbnailUrl"
+        ],
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string",
+            "format": "url"
+          },
+          "thumbnailUrl": {
+            "type": "string",
+            "format": "url"
+          },
+          "isPrivate": {
+            "type": "boolean"
+          },
+          "timesViewed": {
+            "type": "integer"
+          }
+        }
+      },
+      "newVideo": {
+        "type": "object",
+        "required": [
+          "name",
+          "url",
+          "thumbnailUrl"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string",
+            "format": "url"
+          },
+          "thumbnailUrl": {
+            "type": "string",
+            "format": "url"
+          },
+          "isPrivate": {
+            "type": "boolean"
+          },
+          "timesViewed": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+  }
+}

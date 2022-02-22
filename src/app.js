@@ -4,6 +4,7 @@ const express = require("express");
 const logger = require("morgan");
 const path = require("path");
 const rfs = require("rotating-file-stream");
+const swaggerUi = require("swagger-ui-express");
 
 const indexRouter = require("./routes/index");
 
@@ -28,7 +29,18 @@ if (process.env.NODE_ENV === "development") {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+
+const swaggerDocument = require("./configs/swagger.json");
+
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerDocument, {
+    swaggerOptions: {
+      validatorUrl: null,
+    },
+  })
+);
 
 app.use("/api", indexRouter);
 
