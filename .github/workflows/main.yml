@@ -16,7 +16,6 @@ jobs:
       CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
       DB_NAME: ${{ secrets.DB_NAME }}
       HEROKU_APP_URL: ${{ secrets.HEROKU_APP_URL }}
-      NODE_ENV: production
 
     strategy:
       matrix:
