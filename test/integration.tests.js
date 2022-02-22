@@ -8,9 +8,8 @@ if (!Object.prototype.hasOwnProperty.call(process.env, "GITHUB_ACTIONS")) {
   const app = require("../src/app");
   request = request(app);
 } else {
-  console.log("Testing in CI environment");
+  console.log("Testing in CI environment URL: " + process.env.HEROKU_APP_URL);
   request = request(process.env.HEROKU_APP_URL);
-  console.log(process.env.HEROKU_APP_URL);
 }
 
 describe("Testing video endpoints", () => {
