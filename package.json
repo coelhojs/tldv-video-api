@@ -28,8 +28,7 @@
   },
   "homepage": "https://github.com/coelhojs/tldv-video-api#readme",
   "dependencies": {
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
+    "body-parser": "^1.19.2",
     "errorhandler": "^1.5.1",
     "express": "^4.17.3",
     "express-validator": "^6.14.0",
