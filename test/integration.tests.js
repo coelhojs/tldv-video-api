@@ -8,6 +8,7 @@ if (process.env.NODE_ENV === "development") {
   request = request(app);
 } else {
   request = request(process.env.HEROKU_APP_URL);
+  console.log(process.env.HEROKU_APP_URL);
 }
 
 describe("Testing video endpoints", () => {
