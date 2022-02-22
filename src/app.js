@@ -1,5 +1,4 @@
 const bodyParser = require("body-parser");
-const errorHandler = require("errorhandler");
 const express = require("express");
 const swaggerUi = require("swagger-ui-express");
 
@@ -9,11 +8,6 @@ const routes = require("./routes/index");
 
 require("./configs/database");
 
-if (process.env.NODE_ENV === "development") {
-  app.use(errorHandler({ dumpExceptions: true, showStack: true }));
-} else if (process.env.NODE_ENV === "production") {
-  app.use(express.errorHandler());
-}
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
