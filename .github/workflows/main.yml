@@ -30,6 +30,7 @@ jobs:
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           healthcheck: ${{secrets.HEROKU_APP_HEALTHCHECK}}
           delay: 5
+          dontautocreate: true
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
