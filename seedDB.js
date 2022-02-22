@@ -2,8 +2,6 @@ if (process.env.NODE_ENV === "development") {
   require("dotenv").config();
 }
 
-console.log(process.env);
-
 const faker = require("@withshepherd/faker");
 const MongoClient = require("mongodb").MongoClient;
 
@@ -13,6 +11,10 @@ async function seedDB() {
   const uri = process.env.CONNECTION_STRING;
   const dbName = process.env.DB_NAME;
   const collectionName = process.env.COLLECTION_NAME;
+
+  console.log(uri);
+  console.log(dbName);
+  console.log(collectionName);
 
   const client = new MongoClient(uri, {
     useNewUrlParser: true,
