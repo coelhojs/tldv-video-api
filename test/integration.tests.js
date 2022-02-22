@@ -1,5 +1,5 @@
 const assert = require("assert");
-const crypto = require('crypto');
+const crypto = require("crypto");
 
 let request = require("supertest");
 
@@ -47,8 +47,9 @@ describe("Testing video endpoints", () => {
       url: "https://test.com",
       thumbnailUrl: "https://placeimg.com/640/480",
       isPrivate: false,
-      timesViewed: parseInt(crypto.randomBytes(1)),
+      timesViewed: crypto.randomInt(1, 100000),
     });
+
     assert.equal(res.statusCode === 200, true);
   });
 
@@ -59,7 +60,7 @@ describe("Testing video endpoints", () => {
       name: "Test" + Date.now().toLocaleString(),
       url: "https://test-updated.com",
       isPrivate: true,
-      timesViewed: parseInt(crypto.randomBytes(1)),
+      timesViewed: crypto.randomInt(1, 100000),
     });
 
     assert.equal(res.statusCode === 200, true);
