@@ -8,7 +8,7 @@ services:
     environment:
       COLLECTION_NAME: videos
       CONNECTION_STRING: mongodb://mongodb:27017/?directConnection=true&ssl=false
-      DB_NAME: tldv
+      DB_NAME: test
       PORT: 8080
     ports:
       - "8080:8080"
