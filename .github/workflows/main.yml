@@ -8,13 +8,14 @@ on:
 
 jobs:
   build:
+    environment: main
     runs-on: ubuntu-latest
 
     env:
       COLLECTION_NAME: ${{ secrets.COLLECTION_NAME }}
       CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
       DB_NAME: ${{ secrets.DB_NAME }}
-      HEROKU_APP_URL: ${{ secrets.HEROKU_APP_URLg }}
+      HEROKU_APP_URL: ${{ secrets.HEROKU_APP_URL }}
 
     strategy:
       matrix:
