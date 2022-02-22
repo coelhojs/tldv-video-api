@@ -1,5 +1,7 @@
 name: CI/CD
 on:
+  commit:
+    branches: [main]
   pull_request:
     branches: [main]
 
@@ -12,9 +14,6 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      COLLECTION_NAME: ${{ secrets.COLLECTION_NAME }}
-      CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
-      DB_NAME: ${{ secrets.DB_NAME }}
       HEROKU_APP_URL: ${{ secrets.HEROKU_APP_URL }}
 
     strategy:
@@ -23,15 +22,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
-      - uses: akhileshns/heroku-deploy@v3.12.12
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
-          heroku_email: ${{secrets.HEROKU_EMAIL}}
-          healthcheck: ${{secrets.HEROKU_APP_HEALTHCHECK}}
-          delay: 5
-          dontautocreate: true
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
