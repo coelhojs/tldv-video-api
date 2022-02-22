@@ -62,9 +62,9 @@ router.put("/:id", validator.validateVideoUpdate(), async (req, res) => {
     const id = req.params.id;
     const payload = req.body;
 
-    const result = await videoController.update(id, payload);
+    await videoController.update(id, payload);
 
-    res.status(200).json({ id: id, data: result, message: "Video updated!" });
+    res.status(200).json({ id: id, message: `Video ${id} updated!` });
   } catch (error) {
     if (process.env.NODE_ENV === "development") {
       console.error(error);
@@ -81,7 +81,7 @@ router.delete("/:id", async (req, res) => {
 
     await videoController.remove(id);
 
-    res.status(200).json({ message: `Video ${id} deleted!` });
+    res.status(200).json({ id: id, message: `Video ${id} deleted!` });
   } catch (error) {
     if (process.env.NODE_ENV === "development") {
       console.error(error);
