@@ -5,17 +5,20 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-env:
-  COLLECTION_NAME: ${{ secrets.COLLECTION_NAME }}
-  CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
-  DB_NAME: ${{ secrets.DB_NAME }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
+  env:
+    COLLECTION_NAME: ${{ secrets.COLLECTION_NAME }}
+    CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
+    DB_NAME: ${{ secrets.DB_NAME }}
+
     strategy:
       matrix:
         node-version: [14.x]
+
     steps:
       - uses: actions/checkout@v2
 
