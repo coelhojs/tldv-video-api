@@ -10,10 +10,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-  env:
-    COLLECTION_NAME: ${{ secrets.COLLECTION_NAME }}
-    CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
-    DB_NAME: ${{ secrets.DB_NAME }}
+    env:
+      COLLECTION_NAME: ${{ secrets.COLLECTION_NAME }}
+      CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
+      DB_NAME: ${{ secrets.DB_NAME }}
 
     strategy:
       matrix:
