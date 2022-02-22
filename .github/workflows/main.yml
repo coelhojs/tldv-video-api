@@ -14,6 +14,7 @@ jobs:
       COLLECTION_NAME: ${{ secrets.COLLECTION_NAME }}
       CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
       DB_NAME: ${{ secrets.DB_NAME }}
+      HEROKU_APP_URL: ${{ secrets.HEROKU_APP_URLg }}
 
     strategy:
       matrix:
