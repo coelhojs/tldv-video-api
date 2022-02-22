@@ -3,10 +3,12 @@ const assert = require("assert");
 let request = require("supertest");
 
 if (!Object.prototype.hasOwnProperty.call(process.env, "GITHUB_ACTIONS")) {
+  console.log("Testing in local environment");
   require("dotenv").config();
   const app = require("../src/app");
   request = request(app);
 } else {
+  console.log("Testing in CI environment");
   request = request(process.env.HEROKU_APP_URL);
   console.log(process.env.HEROKU_APP_URL);
 }
