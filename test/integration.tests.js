@@ -2,7 +2,7 @@ const assert = require("assert");
 
 let request = require("supertest");
 
-if (process.env.NODE_ENV === "development") {
+if (!Object.prototype.hasOwnProperty.call(process.env, "GITHUB_ACTIONS")) {
   require("dotenv").config();
   const app = require("../src/app");
   request = request(app);
@@ -10,8 +10,6 @@ if (process.env.NODE_ENV === "development") {
   request = request(process.env.HEROKU_APP_URL);
   console.log(process.env.HEROKU_APP_URL);
 }
-
-console.log(process.env);
 
 describe("Testing video endpoints", () => {
   it("Should return a list of videos", async () => {
