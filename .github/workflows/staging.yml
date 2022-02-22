@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      HEROKU_APP_URL: ${{ secrets.HEROKU_APP_URL }}
+      HEROKU_APP_URL: https://tldv-video-api-staging.herokuapp.com
 
     steps:
       - uses: actions/checkout@v2
