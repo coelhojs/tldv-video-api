@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 const swaggerDocument = require("./configs/swagger.json");
 
 app.use(
-  "/api-docs",
+  "/api/docs",
   swaggerUi.serve,
   swaggerUi.setup(swaggerDocument, {
     swaggerOptions: {
@@ -24,6 +24,10 @@ app.use(
 );
 
 app.use("/api", routes);
+
+app.get("/", (req, res) => {
+  res.redirect("/api/docs");
+});
 
 const server = app.listen(port, () => {
   console.log(`Videos API listening on port ${port}`);
