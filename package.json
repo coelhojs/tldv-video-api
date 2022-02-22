@@ -8,7 +8,6 @@
   "scripts": {
     "start": "node src/app.js",
     "seed": "node seedDB.js --trace-warnings",
-    "pretest": "npm run seed",
     "test": "mocha test --timeout 10000 --exit"
   },
   "repository": {
