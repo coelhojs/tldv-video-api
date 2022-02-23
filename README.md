@@ -12,7 +12,7 @@ This is an API to manage video data. The data is stored in a MongoDB database an
 
 ## Usage
 
-The project can be executed in Docker containers, that are orchestrated by Docker Compose. To start the project, open a Terminal and, in the project root directory, run the following command: `docker-compose up -d`. To stop the project, run: `docker-compose down`.
+The project can be executed in Docker containers, that are orchestrated by Docker Compose. To start the project, open a Terminal and, in the project root directory, run the following command: `docker-compose up -d`. To stop the project, run: `docker-compose down`. After starting the containers, the api is available at `http://localhost:8080`.
 
 ## Public access
 
@@ -23,15 +23,16 @@ The project is also available online, in GitHub Actions there are 2 CI/CD pipeli
 In order to assess the quality of the project, SonarCloud is integrated. Some of the available quality metrics are shown in the badges above. For more information, please visit the [SonarCloud analysis report](https://sonarcloud.io/summary/overall?id=coelhojs_tldv-video-api).
 
 ## Tests
+
 There are integration tests for each available endpoint. To run them, open a Terminal and, in the project root directory, run the following command: `npm run test`. The tests depend on a MongoDB database, so it is necessary to start the database before running the tests or referencing one of the databases in MongoDB Atlas.
 
 ## Future work
+
 - [ ] Authentication & Authorization
 - [ ] Better error handling
 - [ ] External logging
 - [ ] More comments in the code
 - [ ] Unit tests
-
 
 ## References
 
