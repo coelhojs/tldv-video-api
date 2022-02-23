@@ -16,13 +16,14 @@ The project can be executed in Docker containers, that are orchestrated by Docke
 
 ## Public access
 
-The project is also available online, in GitHub Actions there are 2 CI/CD pipelines for testing and deploying the API's `staging` and `production` environments at the following URLs, respectively: `https://tldv-video-api-staging.herokuapp.com/` and `https://tldv-video-api.herokuapp.com/`. The data is stored online at MongoDB Atlas.
+The project is also available online, in GitHub Actions there are 2 CI/CD pipelines for testing and deploying the API's `staging` and `production` environments at the following URLs, respectively: https://tldv-video-api-staging.herokuapp.com and https://tldv-video-api.herokuapp.com. The data is stored online at MongoDB Atlas.
 
 ## Quality assessment
 
 In order to assess the quality of the project, SonarCloud is integrated. Some of the available quality metrics are shown in the badges above. For more information, please visit the [SonarCloud analysis report](https://sonarcloud.io/summary/overall?id=coelhojs_tldv-video-api).
 
 ## References
+
 [Dockerizing NodeJS applications](https://nodejs.org/en/docs/guides/nodejs-docker-webapp)
 
 [Swagger UI examples](https://github.com/OAI/OpenAPI-Specification/blob/main/examples/v2.0/json/)
